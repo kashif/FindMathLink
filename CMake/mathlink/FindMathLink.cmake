@@ -8,6 +8,12 @@ if (WIN32)
 endif(WIN32)
 
 if(UNIX)
+  IF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set (MathLink_SYS Linux)
+  ELSE(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set(MathLink_SYS Linux-x86-64)
+  ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+  set(MathLink_ROOT_DIR /usr/local/Wolfram/Mathematica/${MathLink_FIND_VERSION_MAJOR}.${MathLink_FIND_VERSION_MINOR}/SystemFiles/Links/MathLink/DeveloperKit/${MathLink_SYS})
 endif(UNIX)
 
 if(APPLE)
@@ -22,14 +28,36 @@ find_program(MathLink_MPREP_EXECUTABLE NAME mprep
   NO_DEFAULT_PATH)
 mark_as_advanced(MathLink_MPREP_EXECUTABLE)
 
-FIND_LIBRARY( MathLink_ML_LIBRARY NAMES MLi3
-  PATHS ${MathLink_LIBRARY_DIRS} 
-  PATHS /usr/lib)
-  
-SET( MathLink_LIBRARIES
-  ${MathLink_ML_LIBRARY}
-  stdc++
+IF(APPLE)
+  FIND_LIBRARY( MathLink_ML_LIBRARY NAMES MLi3
+    PATHS ${MathLink_LIBRARY_DIRS}
+    )
+    
+  SET( MathLink_LIBRARIES
+    ${MathLink_ML_LIBRARY}
+    stdc++
   )
+ENDIF(APPLE)
+
+IF(UNIX)
+  IF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    FIND_LIBRARY( MathLink_ML_LIBRARY NAMES ML32i3
+      PATHS ${MathLink_LIBRARY_DIRS}
+    )
+  ELSE(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    FIND_LIBRARY( MathLink_ML_LIBRARY NAMES ML64i3
+      PATHS ${MathLink_LIBRARY_DIRS}
+    )
+  ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+  
+  SET( MathLink_LIBRARIES
+    ${MathLink_ML_LIBRARY}
+    m
+    pthread
+    rt
+    stdc++
+  )
+ENDIF(UNIX)
 
 MACRO (MathLink_ADD_TM infile )
  GET_FILENAME_COMPONENT(outfile ${infile} NAME_WE)
