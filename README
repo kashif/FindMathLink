@@ -1,0 +1,12 @@
+This CMake module tries to find MathLink for Wolfram Mathematica application.
+
+To run it we need to first say find_package(MathLink 7.0.1) which needs the Mathematica version, 7.0.1 in this case.
+
+This then defines the following:
+MathLink_Found
+MathLink_INCLUDE_DIRS
+MathLink_LIBRARY_DIRS
+MathLink_LIBRARIES
+as well as the following macro for MathLink_ADD_TM(addtwo.tm) which runs the mprep application on the template file addtwo.tm in this case to produce an addtwo.tm.c file.
+
+This module is inspired by the initial version written by: Jan Woetzel and then Bart Janssen and Roel Jordans.
