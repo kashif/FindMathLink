@@ -52,7 +52,7 @@ ELSE(UNIX)
 ENDIF(UNIX)
 
 find_program(MathLink_MPREP_EXECUTABLE 
-  NAME  mprep
+  NAMES mprep
   PATHS ${MathLink_ROOT_DIR}/CompilerAdditions
         ${MathLink_ROOT_DIR}\\CompilerAdditions\\mldev32\\bin
         ${MathLink_ROOT_DIR}\\CompilerAdditions\\mldev64\\bin
@@ -62,13 +62,13 @@ mark_as_advanced(MathLink_MPREP_EXECUTABLE)
 IF(WIN32)
   IF(CMAKE_SIZEOF_VOID_P EQUAL 4)
     FIND_LIBRARY( MathLink_ML_LIBRARY 
-      NAME  ml32i3m
+      NAMES ml32i3m
       PATHS ${MathLink_LIBRARY_DIR}
             ${MathLink_ROOT_DIR}\\SystemAdditions
           )
   ELSE(CMAKE_SIZEOF_VOID_P EQUAL 4)
     FIND_LIBRARY( MathLink_ML_LIBRARY 
-      NAME  ml64i3m
+      NAMES ml64i3m
       PATHS ${MathLink_LIBRARY_DIR}
             ${MathLink_ROOT_DIR}\\SystemAdditions
           )
@@ -78,8 +78,8 @@ ENDIF(WIN32)
 
 IF(APPLE)
   FIND_LIBRARY( MathLink_ML_LIBRARY 
-    NAME  MLi3
-    PATH  ${MathLink_LIBRARY_DIR}
+    NAMES MLi3
+    PATHS ${MathLink_LIBRARY_DIR}
   )
   SET( MathLink_LIBRARIES ${MathLink_ML_LIBRARY}
     stdc++
@@ -89,13 +89,13 @@ ENDIF(APPLE)
 IF(UNIX AND NOT APPLE)
   IF(CMAKE_SIZEOF_VOID_P EQUAL 4)
     FIND_LIBRARY( MathLink_ML_LIBRARY 
-      NAME  ML32i3
-      PATH  ${MathLink_LIBRARY_DIR}
+      NAMES ML32i3
+      PATHS ${MathLink_LIBRARY_DIR}
     )
   ELSE(CMAKE_SIZEOF_VOID_P EQUAL 4)
     FIND_LIBRARY( MathLink_ML_LIBRARY 
-      NAME  ML64i3
-      PATH  ${MathLink_LIBRARY_DIR}
+      NAMES ML64i3
+      PATHS ${MathLink_LIBRARY_DIR}
     )
   ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 4)
 

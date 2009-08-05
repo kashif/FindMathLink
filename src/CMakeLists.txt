@@ -1,5 +1,5 @@
 MathLink_ADD_TM(addtwo.tm)
-include_directories(${MathLink_INCLUDE_DIRS})
-link_directories(${MathLink_LIBRARY_DIRS})
+include_directories(${MathLink_INCLUDE_DIR})
+link_directories(${MathLink_LIBRARY_DIR})
 add_executable (addtwo addtwo.tm.c addtwo.c)
 target_link_libraries(addtwo ${MathLink_LIBRARIES})
