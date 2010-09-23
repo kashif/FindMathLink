@@ -7,6 +7,6 @@ MathLink_Found
 MathLink_INCLUDE_DIRS
 MathLink_LIBRARY_DIRS
 MathLink_LIBRARIES
-as well as the following macro for MathLink_ADD_TM(addtwo.tm) which runs the mprep application on the template file addtwo.tm in this case to produce an addtwo.tm.c file.
+as well as the following macro: MathLink_ADD_TM(addtwo.tm) which runs the mprep application on the template file addtwo.tm in this case to produce an addtwo.tm.c file. MathLink_ADD_TM also accepts a second optional argument e.g. MathLink_ADD_TM(addtwo.tm .cpp) to specify the extension of the output file.
 
-This module is inspired by the initial version written by: Jan Woetzel and then Bart Janssen and Roel Jordans.
+This module is inspired by the initial version written by: Jan Woetzel and then Bart Janssen and Roel Jordans. The second optional argument feature is by Sascha Kratky.
