@@ -107,10 +107,16 @@ IF(UNIX AND NOT APPLE)
   )
 ENDIF(UNIX AND NOT APPLE)
 
-MACRO (MathLink_ADD_TM infile )
+# specify file extension of output file as optional second argument (default to .c)
+MACRO (MathLink_ADD_TM infile)
  GET_FILENAME_COMPONENT(outfile ${infile} NAME_WE)
  GET_FILENAME_COMPONENT(abs_infile ${infile} ABSOLUTE)
- SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfile}.tm.c)
+ GET_FILENAME_COMPONENT(infile_ext ${infile} EXT)
+ IF(${ARGC} EQUAL 1)
+   SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfile}${infile_ext}.c)
+ ELSE(${ARGC} EQUAL 1)
+   SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfile}${infile_ext}${ARGV1})
+ ENDIF(${ARGC} EQUAL 1)
  ADD_CUSTOM_COMMAND(
    OUTPUT   ${outfile}
    COMMAND  ${MathLink_MPREP_EXECUTABLE}
